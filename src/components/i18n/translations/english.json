@@ -1,0 +1,17 @@
+{
+  "home.home": "Home",
+  "login.login": "Log in",
+  "login.login-instructions": "Log in to your account",
+  "login.logout": "Log out",
+  "login.password": "Password",
+  "login.username": "User",
+  "sections.videos": "Videos",
+  "sections.myVideos": "Favorites",
+  "login": "Login",
+  "logout": "Logout",
+  "routes.home": "/",
+  "routes.videos": "/videos",
+  "routes.myVideos": "/favorites",
+  "routes.video-detail": "/video/:id",
+  "routes.login": "/login"
+}
