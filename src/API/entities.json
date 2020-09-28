@@ -1,8 +1,3 @@
 [
-  "character",
-  "location",
-  "episode",
-  "v3/search?part=snippet&key=AIzaSyC-mlQWTios8Z6H_7_-fRnw7k16QJezOUc&q=gatos",
-  "v3/search?part=snippet&key=AIzaSyC-mlQWTios8Z6H_7_-fRnw7k16QJezOUc&q=",
-  "gatos"
+  "v3/search?part=snippet&key=[AppID]&q="
 ]

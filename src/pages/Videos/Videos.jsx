@@ -5,10 +5,7 @@ import { useSearch } from '../../providers/Search';
 
 const Videos = () => {
   const { value } = useSearch();
-  const { isLoading, data } = useApi(
-    'v3/search?part=snippet&key=AIzaSyC-mlQWTios8Z6H_7_-fRnw7k16QJezOUc&q=',
-    value
-  );
+  const { isLoading, data } = useApi('v3/search?part=snippet&key=[AppID]&q=', value);
 
   return <List isLoading={isLoading} data={data} />;
 };

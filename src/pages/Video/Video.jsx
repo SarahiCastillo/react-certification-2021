@@ -5,10 +5,7 @@ import { Detail } from '../../components/Videos';
 
 const Video = () => {
   const { id } = useParams();
-  const { isLoading, data } = useApi(
-    'v3/search?part=snippet&key=AIzaSyC-mlQWTios8Z6H_7_-fRnw7k16QJezOUc&q=',
-    id
-  );
+  const { isLoading, data } = useApi('v3/search?part=snippet&key=[AppID]&q=', id);
   return <Detail isLoading={isLoading} data={data} />;
 };
 

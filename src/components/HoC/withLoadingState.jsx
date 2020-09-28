@@ -11,7 +11,7 @@ const withLoadingState = (WrappedComponent) => {
       );
     }
 
-    return <WrappedComponent {...props} />
+    return <WrappedComponent {...props} />;
   };
 
   return ComponentWithLoader;
