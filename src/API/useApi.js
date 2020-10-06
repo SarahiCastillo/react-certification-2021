@@ -12,8 +12,6 @@ const useApi = (entity, id) => {
     });
   }, [entity, id]);
 
-  // console.log('DATA', data);
-
   return { isLoading, data };
 };
 

@@ -6,7 +6,6 @@ import SearchProvider from '../../providers/Search';
 import HomePage from '../../pages/Home';
 import LoginPage from '../../pages/Login';
 import NotFound from '../../pages/NotFound';
-import SecretPage from '../../pages/Secret';
 import Videos from '../../pages/Videos';
 import Video from '../../pages/Video';
 import Favorites from '../../pages/Favorites';
@@ -45,27 +44,32 @@ function App() {
         <SearchProvider>
           <Layout>
             <Switch>
-              <Route path={intl.formatMessage({ id: 'routes.videos' })} exact>
-                <Videos />
-              </Route>
-              <Route path={intl.formatMessage({ id: 'routes.video-detail' })}>
-                <Video />
-              </Route>
-              <Private path={intl.formatMessage({ id: 'routes.myVideos' })}>
-                <Favorites />
-              </Private>
-              <Route path={intl.formatMessage({ id: 'routes.login' })}>
-                <LoginPage />
-              </Route>
-              <Route path={intl.formatMessage({ id: 'routes.home' })}>
-                <HomePage />
-              </Route>
-              <Private exact path="/secret">
-                <SecretPage />
-              </Private>
-              <Route path="*">
-                <NotFound />
-              </Route>
+              <Route
+                path={intl.formatMessage({ id: 'routes.videos' })}
+                exact
+                component={Videos}
+              />
+              <Route
+                path={intl.formatMessage({ id: 'routes.video-detail' })}
+                component={Video}
+              />
+
+              <Private
+                path={intl.formatMessage({ id: 'routes.myVideos' })}
+                component={Favorites}
+              />
+
+              <Route
+                path={intl.formatMessage({ id: 'routes.login' })}
+                component={LoginPage}
+              />
+
+              <Route
+                path={intl.formatMessage({ id: 'routes.home' })}
+                component={HomePage}
+              />
+
+              <Route path="*" component={NotFound} />
             </Switch>
             <Fortune />
           </Layout>

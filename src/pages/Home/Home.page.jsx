@@ -12,7 +12,6 @@ function HomePage() {
   const { authenticated, logout } = useAuth();
   const intl = useIntl();
   const history = useHistory();
-  // const sectionRef = useRef(null);
 
   function deAuthenticate(event) {
     event.preventDefault();
@@ -24,33 +23,36 @@ function HomePage() {
   ${normalize()}
   `;
 
+  function search() {
+    history.push(intl.formatMessage({ id: 'routes.videos' }));
+  }
+
   const handleChange = (event) => {
-    console.log('event.target.value', event.target.value);
     setNewValue(event.target.value);
   };
 
   return (
     <section className="homepage">
-      <h1>Hello wizeliner!</h1>
-      <form>
-        <GlobalStyle />
-        <div id="inputSearch">
-          <input
-            onChange={handleChange}
-            name="searchInput"
-            type="text"
-            required
-            placeholder="Search videos"
-          />
-        </div>
-        <Link to={intl.formatMessage({ id: 'routes.videos' })}>
-          <span role="img" aria-label="author emoji">
-            🔍{' '}
-          </span>
-        </Link>
-      </form>
       {authenticated ? (
         <>
+          <h1>Hello wizeliner!</h1>
+          <form onSubmit={search}>
+            <GlobalStyle />
+            <div id="inputSearch">
+              <input
+                onChange={handleChange}
+                name="searchInput"
+                type="text"
+                required
+                placeholder="Search videos"
+              />
+            </div>
+            <Link to={intl.formatMessage({ id: 'routes.videos' })}>
+              <span role="img" aria-label="author emoji">
+                🔍{' '}
+              </span>
+            </Link>
+          </form>
           <h2>Welcome back</h2>
           <span>
             <Link to={intl.formatMessage({ id: 'routes.home' })} onClick={deAuthenticate}>
@@ -61,7 +63,12 @@ function HomePage() {
           </span>
         </>
       ) : (
-        <Link to={intl.formatMessage({ id: 'routes.login' })}>Login →</Link>
+        <span>
+          <h2 data-testid="texto">Hello stranger!</h2>
+          <Link to={intl.formatMessage({ id: 'routes.login' })} data-testid="notlogged">
+            Login →
+          </Link>
+        </span>
       )}
     </section>
   );

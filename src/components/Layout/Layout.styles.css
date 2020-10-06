@@ -2,8 +2,10 @@
   width: 100vw;
   height: 100vh;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin-top: -3rem;
+  margin-top: 20rem;
+  padding: 1rem;
+  overflow: auto;
 }

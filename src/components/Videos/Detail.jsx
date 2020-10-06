@@ -4,6 +4,9 @@ import { useIntl } from 'react-intl';
 import styled, { createGlobalStyle } from 'styled-components';
 import { favoritesStorage } from '../../utils/favoritesStorage';
 import { withLoadingState } from '../HoC';
+import ListVideos from '../../pages/Videos';
+import { useSearch } from '../../providers/Search';
+import './detail.styles.css';
 
 const GlobalStyle = createGlobalStyle`
     body {
@@ -15,6 +18,7 @@ const GlobalStyle = createGlobalStyle`
 
 const CardList = styled.section`
   display: flex;
+  overflow: auto;
   padding: 2rem;
   overflow: scroll;
 `;
@@ -23,7 +27,8 @@ const Card = styled.article`
   display: flex;
   flex-direction: column;
   position: relative;
-  height: 850px;
+  overflow: auto;
+  height: 900px;
   width: 1050px;
   min-width: 250px;
   padding: 1rem;
@@ -85,22 +90,36 @@ const CardFooter = styled.footer`
   }
 `;
 
+const RelatedVideos = styled.section`
+  background color: gray;
+  opacity: 0.5;
+  height: 500px;
+  display: flex;
+  overflow: auto;
+  flex-direction: row;
+  align-items: baseline;
+
+  &:hover {
+    opacity: 1;
+  } 
+`;
+
 function addFavorite(id) {
   favoritesStorage.setFavorites(id);
-  console.log('added', id);
 }
 
 const Detail = ({ data }) => {
   const intl = useIntl();
+  const { setNewValue } = useSearch();
 
   return (
-    <div id="cardsContainer">
+    <>
       <GlobalStyle />
       <CardList>
         <Card>
           {data
             ? data.items.map((item) => {
-                console.log('item.id.videoId', item.id.videoId);
+                setNewValue(item.snippet.title);
                 return (
                   <div key={item.id.videoId}>
                     <iframe
@@ -108,17 +127,25 @@ const Detail = ({ data }) => {
                       height="600"
                       allowFullScreen
                       frameBorder="0"
-                      title="rick roll"
-                      src={`https://www.youtube.com/embed/${item.id.videoId}?controls=0&autoplay=1`}
+                      title="video"
+                      src={`https://www.youtube.com/embed/${item.id.videoId}?controls=0&autoplay=0`}
                       allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                      data-testid="video"
                     />
                     <CardLink>
-                      <Link to={intl.formatMessage({ id: 'routes.videos' })}>
-                        <span role="img" aria-label="author emoji">
+                      <Link
+                        to={intl.formatMessage({ id: 'routes.videos' })}
+                        data-testid="goback"
+                      >
+                        <span id="goBack" role="img" aria-label="author emoji">
                           ⬅️ Go back{' '}
                         </span>
                       </Link>
-                      <Link to={intl.formatMessage({ id: 'routes.myVideos' })}>
+                      <br />
+                      <Link
+                        to={intl.formatMessage({ id: 'routes.myVideos' })}
+                        data-testid="add"
+                      >
                         <button type="button" onClick={addFavorite(item.id.videoId)}>
                           <span role="img" aria-label="author emoji">
                             ❤️ Add Favorite{' '}
@@ -131,13 +158,21 @@ const Detail = ({ data }) => {
                       <h4>Channel: {item.snippet.channelTitle}</h4>
                       <p>{item.snippet.description}</p>
                     </CardFooter>
+                    <h2>
+                      <span role="img" aria-label="author emoji">
+                        Related videos ⬇️{' '}
+                      </span>
+                    </h2>
+                    <RelatedVideos>
+                      <ListVideos />
+                    </RelatedVideos>
                   </div>
                 );
               })
             : 'Loading...'}
         </Card>
       </CardList>
-    </div>
+    </>
   );
 };
 

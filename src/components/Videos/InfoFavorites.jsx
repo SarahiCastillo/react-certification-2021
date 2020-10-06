@@ -51,7 +51,6 @@ const InfoFavorites = ({ video }) => {
   const videoPath = intl
     .formatMessage({ id: 'routes.video-detail' })
     .replace(':id', video);
-  console.log('id video', video);
 
   return (
     <div id="cardsContainer">

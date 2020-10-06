@@ -20,19 +20,22 @@ function Navbar() {
     <div>
       <nav>
         <div className="menu">
-          <Link to={intl.formatMessage({ id: 'routes.home' })}>
+          <Link to={intl.formatMessage({ id: 'routes.home' })} data-testid="home">
             <span role="img" aria-label="author emoji">
               🏠{' '}
             </span>
           </Link>
         </div>
         <div className="menu">
-          <Link to={intl.formatMessage({ id: 'routes.videos' })}>
+          <Link to={intl.formatMessage({ id: 'routes.videos' })} data-testid="videos">
             <FormattedMessage id="sections.videos" />
           </Link>
         </div>
         <div className="menu">
-          <Link to={intl.formatMessage({ id: 'routes.myVideos' })}>
+          <Link
+            to={intl.formatMessage({ id: 'routes.myVideos' })}
+            data-testid="favoritos"
+          >
             <FormattedMessage id="sections.myVideos" />
           </Link>
         </div>
@@ -42,6 +45,7 @@ function Navbar() {
               <Link
                 to={intl.formatMessage({ id: 'routes.login' })}
                 onClick={deAuthenticate}
+                data-testid="islogged"
               >
                 <span role="img" aria-label="author emoji">
                   👤{' '}
@@ -50,7 +54,7 @@ function Navbar() {
               </Link>
             </>
           ) : (
-            <Link to={intl.formatMessage({ id: 'routes.login' })}>
+            <Link to={intl.formatMessage({ id: 'routes.login' })} data-testid="notlogged">
               <span role="img" aria-label="author emoji">
                 👤{' '}
               </span>

@@ -5,7 +5,10 @@ import { Detail } from '../../components/Videos';
 
 const Video = () => {
   const { id } = useParams();
-  const { isLoading, data } = useApi('v3/search?part=snippet&key=[AppID]&q=', id);
+  const { isLoading, data } = useApi(
+    'v3/search?part=snippet&key=AIzaSyDzRXfcJrid0u60yOqHIGWvwmqVDUhMHhE&q=',
+    id
+  );
   return <Detail isLoading={isLoading} data={data} />;
 };
 

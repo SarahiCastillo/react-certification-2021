@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import { Grid } from 'semantic-ui-react';
 import styled, { createGlobalStyle } from 'styled-components';
 import { useIntl } from 'react-intl';
+import { useAuth } from '../../providers/Auth';
 
 const GlobalStyle = createGlobalStyle`
     body {
@@ -49,28 +49,35 @@ const Card = styled.article`
 
 const Info = ({ video }) => {
   const intl = useIntl();
+  const { authenticated } = useAuth();
   const videoPath = intl
     .formatMessage({ id: 'routes.video-detail' })
     .replace(':id', video.id.videoId);
 
   return (
     <div id="cardsContainer">
-      <GlobalStyle />
-      <CardList>
-        <Link to={videoPath}>
-          <Card>
-            <iframe
-              width="450"
-              height="450"
-              allowFullScreen
-              frameBorder="0"
-              title="rick roll"
-              src={`https://www.youtube.com/embed/${video.id.videoId}?controls=0&autoplay=0`}
-              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-            />
-          </Card>
-        </Link>
-      </CardList>
+      {authenticated ? (
+        <>
+          <GlobalStyle />
+          <CardList>
+            <Link to={videoPath}>
+              <Card>
+                <iframe
+                  width="450"
+                  height="450"
+                  allowFullScreen
+                  frameBorder="0"
+                  title="rick roll"
+                  src={`https://www.youtube.com/embed/${video.id.videoId}?controls=0&autoplay=0`}
+                  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                />
+              </Card>
+            </Link>
+          </CardList>
+        </>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };
